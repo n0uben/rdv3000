@@ -1,6 +1,7 @@
 package fr.iut.rdv3000.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 /**
  * Classe abstraites regroupant les informations communes entre employés et clients
@@ -15,9 +16,13 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 2)
     @Column(name = "prenom")
     private String firstName;
 
+    @NotNull
+    @Size(min = 2)
     @Column(name="nom")
     private String lastName;
 

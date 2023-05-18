@@ -1,6 +1,9 @@
 package fr.iut.rdv3000.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -12,6 +15,7 @@ public class RendezVous {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(name = "titre")
     private String title;
 
@@ -21,11 +25,24 @@ public class RendezVous {
     @Column(name = "fin")
     private Date end;
 
+    //ajouter notnull constraints a la fin
     @ManyToOne
     private Employee employee;
 
+    //ajouter notnull constraints a la fin
     @ManyToOne
     private Client client;
+
+    public RendezVous() {
+    }
+
+    public RendezVous(String title, Date start, Date end, Employee employee, Client client) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
+        this.employee = employee;
+        this.client = client;
+    }
 
     public Long getId() {
         return id;
@@ -57,5 +74,21 @@ public class RendezVous {
 
     public void setEnd(Date end) {
         this.end = end;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

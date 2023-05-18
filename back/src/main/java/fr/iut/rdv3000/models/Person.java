@@ -26,10 +26,10 @@ public abstract class Person {
     @Column(name="nom")
     private String lastName;
 
-    public Person() {
+    protected Person() {
     }
 
-    public Person(String firstName, String lastName) {
+    protected Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

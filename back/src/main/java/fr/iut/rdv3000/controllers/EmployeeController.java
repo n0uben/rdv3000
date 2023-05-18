@@ -1,6 +1,5 @@
 package fr.iut.rdv3000.controllers;
 
-import fr.iut.rdv3000.models.Client;
 import fr.iut.rdv3000.models.Employee;
 import fr.iut.rdv3000.repositories.EmployeeRepository;
 import org.springframework.http.ResponseEntity;

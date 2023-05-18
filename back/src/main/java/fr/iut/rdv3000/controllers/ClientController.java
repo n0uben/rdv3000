@@ -1,9 +1,7 @@
 package fr.iut.rdv3000.controllers;
 
 import fr.iut.rdv3000.models.Client;
-import fr.iut.rdv3000.models.Employee;
 import fr.iut.rdv3000.repositories.ClientRepository;
-import fr.iut.rdv3000.repositories.EmployeeRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +47,7 @@ public class ClientController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Long id) {
         return repository.findById(id)

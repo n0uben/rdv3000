@@ -2,6 +2,7 @@ package fr.iut.rdv3000.controllers;
 
 import fr.iut.rdv3000.models.RendezVous;
 import fr.iut.rdv3000.repositories.RendezVousRepository;
+import fr.iut.rdv3000.services.RendezVousService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,11 @@ public class RendezVousController {
 
     private final RendezVousRepository repository;
 
-    public RendezVousController(RendezVousRepository repository) {
+    private final RendezVousService service;
+
+    public RendezVousController(RendezVousRepository repository, RendezVousService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @GetMapping
@@ -29,8 +33,14 @@ public class RendezVousController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Methode pour creer un RDV. Si est en conflit avec un rdv existant, renvoie le status bad request
+     * @param newRdv Rendez vous RequestBody
+     * @return ResponseEntity<RendezVous>
+     */
     @PostMapping
-    public RendezVous create(@RequestBody final RendezVous newRdv) {
+    public ResponseEntity<RendezVous> create(@RequestBody final RendezVous newRdv) {
+
         RendezVous rendezVousReceived = new RendezVous(
                 newRdv.getTitle(),
                 newRdv.getStart(),
@@ -38,7 +48,13 @@ public class RendezVousController {
                 newRdv.getEmployee(),
                 newRdv.getClient()
         );
-        return repository.saveAndFlush(rendezVousReceived);
+
+        if (service.isThereAnOverlappingRdv(rendezVousReceived)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        RendezVous rdvCreated = repository.saveAndFlush(rendezVousReceived);
+        return ResponseEntity.ok(rdvCreated);
     }
 
     @PutMapping(value = "{id}")

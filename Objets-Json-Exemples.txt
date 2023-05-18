@@ -1,0 +1,37 @@
+// Rendez-vous :
+{
+  "id": 1,
+  "title": "Meeting 1",
+  "start": "2023-05-18T08:00:00.000+00:00",
+  "end": "2023-05-18T09:00:00.000+00:00",
+  "employee": {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "position": "Manager"
+  },
+  "client": {
+    "id": 1,
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice.johnson@email.com"
+  }
+}
+
+// Client :
+
+{
+    "id": 1,
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice.johnson@email.com"
+}
+
+// Employé :
+
+{
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "position": "Manager"
+}

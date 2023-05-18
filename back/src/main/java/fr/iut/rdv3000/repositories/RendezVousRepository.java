@@ -32,6 +32,6 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
             @Param("start") Date start,
             @Param("end") Date end,
             @Param("employeeId") Long employeeId,
-            @Param("ClientId") Long clientId
+            @Param("clientId") Long clientId
     );
 }

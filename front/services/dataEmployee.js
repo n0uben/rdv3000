@@ -8,6 +8,14 @@ class DataEmployee {
 
         return data;
     }
+
+    async getOne(id) {
+        const response = await fetch(this.baseUrl + "/employee/" + id);
+        console.log(response)
+        const data = await response.json();
+
+        return data;
+    }
 }
 
 export default new DataEmployee();

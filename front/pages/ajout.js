@@ -1,7 +1,22 @@
 import Link from "next/link";
 import Layout from "@/components/layout";
+import dataEmployee from "@/services/dataEmployee";
+import dataClient from "@/services/dataClient";
 
-export default function Ajout() {
+export async function getServerSideProps() {
+    const allEmployees = await dataEmployee.getAll();
+    const allClients = await dataClient.getAll()
+
+    return {
+        props: {
+            allEmployees,
+            allClients,
+        }
+    }
+}
+
+export default function Ajout({allEmployees, allClients}) {
+
     return (
         <Layout>
             <div className="my-12">
@@ -23,19 +38,31 @@ export default function Ajout() {
                 <label className="block mt-6">Employé</label>
                 <select className="mt-3 block w-full">
                     <option>Sélectionner un employé</option>
-                    <option>employee 1</option>
+                    {allEmployees.map((employee) => (
+                        <option value={employee.id} key={employee.id}>
+                            {employee.firstName} {employee.lastName}
+                        </option>
+                    ))}
                 </select>
 
                 <label className="block mt-6">Client</label>
                 <select className="mt-3 block w-full">
                     <option>Sélectionner un client</option>
-                    <option>client 1</option>
+                    {allClients.map((client) => (
+                        <option value={client.id} key={client.id}>
+                            {client.firstName} {client.lastName}
+                        </option>
+                    ))}
                 </select>
 
             </div>
             <div className="mt-9">
-                <button className="bg-green-600 px-5 py-2 rounded-full text-white">Ajouter</button>
+                <button onClick={handleClick} className="bg-green-600 px-5 py-2 rounded-full text-white">Ajouter</button>
             </div>
         </Layout>
     );
+}
+
+function handleClick() {
+    console.log("coucou");
 }

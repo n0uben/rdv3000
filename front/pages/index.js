@@ -2,7 +2,7 @@ import Link from "next/link";
 import Layout from "@/components/layout";
 import dataRendezVous from "@/services/dataRendezVous";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const allRendezVous = await dataRendezVous.getAll();
 
     return {

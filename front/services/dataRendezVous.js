@@ -9,7 +9,15 @@ class DataRendezVous extends DataService {
         return data;
     }
 
+    async getOne(id) {
+        const response = await fetch(this.baseUrl + "/rendezvous/" + id);
+        const data = await response.json();
+
+        return data;
+    }
+
     async create(rendezvous) {
+        console.log("avant envoi en bdd" + JSON.stringify(rendezvous));
         const response = await fetch(this.baseUrl + "/rendezvous", {
             headers: {
                 'Content-Type': 'application/json'
@@ -19,6 +27,26 @@ class DataRendezVous extends DataService {
         } );
         if (response.status === 200) {
             return response;
+        }
+        if (response.status === 400) {
+            alert("IMPOSSIBLE DENREGISTRER LE RDV !\n Un de deux participants a un autre rdv en meme temps !")
+        }
+        return null;
+    }
+
+    async update(rendezvous) {
+        const response = await fetch(this.baseUrl + "/rendezvous/" + rendezvous.id, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(rendezvous)
+        } );
+        if (response.status === 200) {
+            return response;
+        }
+        if (response.status === 400) {
+            alert("IMPOSSIBLE DENREGISTRER LE RDV !\n Un de deux participants a un autre rdv en meme temps !")
         }
         return null;
     }

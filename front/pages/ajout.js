@@ -7,8 +7,16 @@ import dataRendezVous from "@/services/dataRendezVous";
 import {useRouter} from "next/router";
 
 export async function getServerSideProps() {
-    const allEmployees = await dataEmployee.getAll();
-    const allClients = await dataClient.getAll()
+    let allEmployees = [];
+    let allClients = [];
+
+    try {
+        allEmployees = await dataEmployee.getAll();
+        allClients = await dataClient.getAll();
+    } catch (e) {
+        console.error(e);
+    }
+
 
     return {
         props: {

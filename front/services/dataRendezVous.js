@@ -1,6 +1,6 @@
-class DataRendezVous {
+import DataService from "@/services/dataService";
 
-    baseUrl = "http://localhost:8080"
+class DataRendezVous extends DataService {
 
     async getAll(){
         const response = await fetch(this.baseUrl + "/rendezvous")

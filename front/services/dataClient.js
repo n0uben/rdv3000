@@ -1,6 +1,6 @@
-class DataClient {
+import DataService from "@/services/dataService";
 
-    baseUrl = "http://localhost:8080"
+class DataClient extends DataService {
 
     async getAll() {
         const response = await fetch(this.baseUrl + "/client")

@@ -1,17 +1,9 @@
-class DataEmployee {
+import DataService from "@/services/dataService";
 
-    baseUrl = "http://localhost:8080"
+class DataEmployee extends DataService {
 
     async getAll() {
         const response = await fetch(this.baseUrl + "/employee")
-        const data = await response.json();
-
-        return data;
-    }
-
-    async getOne(id) {
-        const response = await fetch(this.baseUrl + "/employee/" + id);
-        console.log(response)
         const data = await response.json();
 
         return data;

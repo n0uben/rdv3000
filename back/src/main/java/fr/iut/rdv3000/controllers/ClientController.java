@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/client")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3001")
 public class ClientController {
     private final ClientRepository repository;
 

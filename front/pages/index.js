@@ -4,7 +4,12 @@ import dataRendezVous from "@/services/dataRendezVous";
 import {useState} from "react";
 
 export async function getServerSideProps() {
-    const allRendezVous = await dataRendezVous.getAll();
+    let allRendezVous = [];
+    try {
+        allRendezVous = await dataRendezVous.getAll();
+    } catch (e) {
+        console.error(e);
+    }
 
     return {
         props: {

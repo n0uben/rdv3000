@@ -88,7 +88,7 @@ export default function Edit({allEmployees, allClients, rendezvous}) {
                 <input id="debutInput"
                        type="datetime-local"
                        value={start}
-                       onChange={(e) => setStart(new Date(e.target.value).toISOString())}
+                       onChange={(e) => setStart(e.target.value)}
                        className="mt-3 block w-full"
                        required/>
 
@@ -97,7 +97,7 @@ export default function Edit({allEmployees, allClients, rendezvous}) {
                        type="datetime-local"
                        className="mt-3 block w-full"
                        value={end}
-                       onChange={(e) => setEnd(new Date(e.target.value).toISOString())}
+                       onChange={(e) => setEnd(e.target.value)}
                        required/>
 
                 <label htmlFor="employeeSelect" className="block mt-6">Employé</label>

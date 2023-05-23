@@ -4,6 +4,7 @@ import dataRendezVous from "@/services/dataRendezVous";
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSort} from "@fortawesome/free-solid-svg-icons";
+import dayjs from "dayjs";
 
 export async function getServerSideProps() {
     let allRendezVous = [];
@@ -45,7 +46,7 @@ export default function Home({allRendezVous}) {
             setAToZ(!aToZ);
         } else {
             setSortKey(key);
-            setAToZ(true);
+            setAToZ(false);
         }
 
         let sortedData = [];
@@ -97,8 +98,9 @@ export default function Home({allRendezVous}) {
                 {rendezvousList.map(rendezvous => (
                     <tr key={rendezvous.id} id={rendezvous.id}>
                         <td className="border px-4 py-2">{rendezvous.title}</td>
-                        <td className="border px-4 py-2">{rendezvous.start.toString().replace("T", " ").slice(0, 16)}</td>
-                        <td className="border px-4 py-2">{rendezvous.end.toString().replace("T", " ").slice(0, 16)}</td>
+                        {/*on utilise la librairie dayjs pour formater les dates*/}
+                        <td className="border px-4 py-2">{dayjs(rendezvous.start).format('DD/MM/YY HH:mm')}</td>
+                        <td className="border px-4 py-2">{dayjs(rendezvous.start).format('DD/MM/YY HH:mm')}</td>
                         <td className="border px-4 py-2">{rendezvous.employee.firstName} {rendezvous.employee.lastName}</td>
                         <td className="border px-4 py-2">{rendezvous.client.firstName} {rendezvous.client.lastName}</td>
                         <td className="border px-4 py-2">{rendezvous.client.email}</td>

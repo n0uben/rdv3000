@@ -2,6 +2,8 @@ import Link from "next/link";
 import Layout from "@/components/layout";
 import dataRendezVous from "@/services/dataRendezVous";
 import {useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSort} from "@fortawesome/free-solid-svg-icons";
 
 export async function getServerSideProps() {
     let allRendezVous = [];
@@ -31,6 +33,16 @@ export default function Home({allRendezVous}) {
         }
     };
 
+    const handleSort = (event) => {
+        let key = event.target.id;
+
+        let sortedData = [...rendezvousList].sort((a , b) => {
+            return a[key] < b[key]
+        });
+        sortedData.forEach(item => console.log(item.title))
+        setRendezvousList(sortedData);
+    }
+
     return (
         <Layout>
             <div className="my-12">
@@ -42,11 +54,11 @@ export default function Home({allRendezVous}) {
             <table className="table-auto">
                 <thead>
                 <tr>
-                    <th className="px-4 py-2">Titre</th>
-                    <th className="px-4 py-2">Début</th>
-                    <th className="px-4 py-2">Fin</th>
-                    <th className="px-4 py-2">Employee</th>
-                    <th className="px-4 py-2">Client</th>
+                    <th id="title" className="px-4 py-2" onClick={handleSort}>Titre <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="start" className="px-4 py-2" onClick={handleSort}>Début <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="end" className="px-4 py-2" onClick={handleSort}>Fin <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="employee" className="px-4 py-2" onClick={handleSort}>Employee <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="client" className="px-4 py-2" onClick={handleSort}>Client <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
                     <th className="px-4 py-2">Email client</th>
                     <th className="px-4 py-2">Actions</th>
                 </tr>

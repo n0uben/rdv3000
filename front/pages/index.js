@@ -23,6 +23,8 @@ export async function getServerSideProps() {
 export default function Home({allRendezVous}) {
 
     const [rendezvousList, setRendezvousList] = useState(allRendezVous);
+    const [aToZ, setAToZ] = useState(true);
+    const [sortKey, setSortKey] = useState('');
 
     const handleDelete = async (event) => {
         const idToDelete = event.target.parentElement.id;
@@ -34,11 +36,36 @@ export default function Home({allRendezVous}) {
     };
 
     const handleSort = (event) => {
+
         let key = event.target.id;
 
-        let sortedData = [...rendezvousList].sort((a , b) => {
-            return a[key] < b[key]
-        });
+        //si on essaie de recliquer sur une colonne que l'on vient de trier
+        //on trie dans l'autre sens
+        if (key == sortKey) {
+            setAToZ(!aToZ);
+        } else {
+            setSortKey(key);
+            setAToZ(true);
+        }
+
+        let sortedData = [];
+
+        if (aToZ) {
+            sortedData = [...rendezvousList].sort((a , b) => {
+                if (key === 'employee' || key == 'client') {
+                    return a[key].lastName < b[key].lastName
+                }
+                return a[key] < b[key]
+            });
+        } else {
+            sortedData = [...rendezvousList].sort((a , b) => {
+                if (key === 'employee' || key == 'client') {
+                    return a[key].lastName > b[key].lastName
+                }
+                return a[key] > b[key]
+            });
+        }
+
         sortedData.forEach(item => console.log(item.title))
         setRendezvousList(sortedData);
     }
@@ -54,11 +81,11 @@ export default function Home({allRendezVous}) {
             <table className="table-auto">
                 <thead>
                 <tr>
-                    <th id="title" className="px-4 py-2" onClick={handleSort}>Titre <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
-                    <th id="start" className="px-4 py-2" onClick={handleSort}>Début <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
-                    <th id="end" className="px-4 py-2" onClick={handleSort}>Fin <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
-                    <th id="employee" className="px-4 py-2" onClick={handleSort}>Employee <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
-                    <th id="client" className="px-4 py-2" onClick={handleSort}>Client <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="title" className="px-4 py-2 cursor-pointer" onClick={handleSort}>Titre <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="start" className="px-4 py-2 cursor-pointer" onClick={handleSort}>Début <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="end" className="px-4 py-2 cursor-pointer" onClick={handleSort}>Fin <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="employee" className="px-4 py-2 cursor-pointer" onClick={handleSort}>Employee <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
+                    <th id="client" className="px-4 py-2 cursor-pointer" onClick={handleSort}>Client <FontAwesomeIcon className="ml-2" icon={faSort} /></th>
                     <th className="px-4 py-2">Email client</th>
                     <th className="px-4 py-2">Actions</th>
                 </tr>

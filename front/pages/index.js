@@ -52,6 +52,8 @@ export default function Home({allRendezVous}) {
 
         if (aToZ) {
             sortedData = [...rendezvousList].sort((a , b) => {
+                //si on cherche a trier les employés ou clients
+                //on trie par les noms de famille
                 if (key === 'employee' || key == 'client') {
                     return a[key].lastName < b[key].lastName
                 }

@@ -1,5 +1,21 @@
 # rdv3000
 
+Projet à réaliser dans le cadre du programme de la licence Professionnelle Génie Logiciel à l'IUT de Metz.
+
+## Auteur
+
+- [Benjamin](https://github.com/n0uben)
+
+## Technologies
+
+Back :
+- Java + Spring Boot
+- Bdd H2 & Hibernate
+
+Front :
+- React / Nextjs
+- Tailwind css
+
 ## Bien Démarrer
 
 - Tout d'abord, cloner ce repo git :
